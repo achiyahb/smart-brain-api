@@ -18,8 +18,17 @@ app.post('/signin',(req,res) =>{
         password === db.getDB().users[0].password){
         res.json('success')
     } else {
-        res.json('signing in failed')
+        res.status(400).json('signing in failed')
     }
+})
+
+app.post('/register',(req,res) =>{
+    if(req.body.password && req.body.email && req.body.name){
+        res.json(db.insertToDb( req.body))
+    } else {
+        res.status(400).json('registering is failed')
+    }
+
 })
 
 app.listen(3000, ()=>{

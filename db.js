@@ -1,11 +1,26 @@
 module.exports  = {
-    getDB
+    getDB,
+    insertToDb
 }
 function getDB(){
     return database
 }
 
+function insertToDb(user){
+    let newUser = {
+        name:user.name,
+        email:user.email,
+        password:user.password,
+        entries:0,
+        registerDate: new Date(),
+        id: database.counter
+    }
+    database.counter++
+    return newUser
+}
+
 const database = {
+    counter:125,
     users: [
         {
             id: '123',
