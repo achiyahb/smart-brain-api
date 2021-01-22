@@ -1,10 +1,21 @@
-module.exports  = {
-    getDB,
-    insertToDb
-}
+const knex = require('knex')
+
+
 function getDB(){
     return database
 }
+
+const db = knex({
+    client: 'pg',
+        connection: {
+        host : '127.0.0.1',
+            user : 'postgres',
+            password : 'test123',
+            database : 'smart-brain'
+}
+})
+
+
 
 function insertToDb(user){
     let newUser = {
@@ -15,6 +26,7 @@ function insertToDb(user){
         registerDate: new Date(),
         id: database.counter
     }
+    database.users.push()
     database.counter++
     return newUser
 }
@@ -39,4 +51,10 @@ const database = {
             registerDate: new Date()
         }
     ]
+}
+
+module.exports  = {
+    getDB,
+    insertToDb,
+    db
 }
